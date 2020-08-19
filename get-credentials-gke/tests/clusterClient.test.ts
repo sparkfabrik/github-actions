@@ -46,6 +46,12 @@ describe('Cluster', function () {
   });
 
   it('initializes with ADC', async function () {
+    if (
+      !process.env.GCLOUD_PROJECT ||
+      !process.env.GOOGLE_APPLICATION_CREDENTIALS
+    ) {
+      this.skip();
+    }
     const client = new ClusterClient(location);
     expect(client.auth.jsonContent).eql(null);
     const auth = (await client.getAuthClient()) as JWT;
