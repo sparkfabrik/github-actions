@@ -1,0 +1,35 @@
+name: GKE get-credentials
+description: Configure authentication to GKE clusters.
+author: GoogleCloudPlatform
+
+inputs:
+  credentials:
+    description: |-
+      Optional service account key to use for authentication to GKE. This should be the JSON
+      formatted private key which can be exported from the Cloud Console. The
+      value can be raw or base64-encoded.
+    required: false
+  name:
+    description: |-
+      Name of the cluster to get credentials for.
+    required: true
+  location:
+    description: |-
+      Location (Region/Zone) for the cluster.
+    required: true
+  project_id:
+    description: |-
+      Project id where the cluster is deployed.
+    required: false
+  use_auth_provider:
+    description: |-
+      Flag to use short lived OIDC token or GCP auth plugin in kubectl.
+    required: false
+  use_internal_ip:
+    description: |-
+      Flag to use the internal IP address of the cluster endpoint with private clusters.
+    required: false
+
+runs:
+  using: "node12"
+  main: "dist/index.js"
